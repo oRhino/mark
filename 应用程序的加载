@@ -1,0 +1,10 @@
+dyld:
+dyld（the dynamic link editor）是苹果的动态链接器，是苹果操作系统一个重要组成部分，在系统内核做好程序准备工作之后，交由dyld负责余下的工作。而且它是开源的，任何人可以通过苹果官网下载它的源码来阅读理解它的运作方式.  (https://opensource.apple.com/tarballs/dyld/)
+
+ALSR
+
+共享缓存机制:
+在iOS系统中，每个程序依赖的动态库都需要通过dyld（位于/usr/lib/dyld）一个一个加载到内存，然而，很多系统库几乎是每个程序都会用到的，如果在每个程序运行的时候都重复的去加载一次，势必造成运行缓慢，为了优化启动速度和提高程序性能，共享缓存机制就应运而生。所有默认的动态链接库被合并成一个大的缓存文件，放到/System/Library/Caches/com.apple.dyld/目录下，按不同的架构保存分别保存着,如iPhone6可查看/System/Library/Caches/com.apple.dyld/目录下 1:dyld_shared_cache_armv7s 2:dyld_shared_cache_armv64
+
+. dyld_cache_extract提取
+dyld_cache_extract（ https://github.com/macmade/dyld_cache_extract ）是一个可视化的工具，可把dyld_shared_cache载入即可解析出来。
